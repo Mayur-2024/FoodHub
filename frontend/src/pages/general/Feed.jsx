@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../styles/home.css";
-import axios from "axios";
+import api from "../../api/api";
 import { Link, useNavigate } from "react-router-dom";
 
 const HeartIcon = () => (
@@ -101,8 +101,8 @@ const Feed = () => {
 
   useEffect(() => {
     // Fetch public food videos (no auth required)
-    axios
-      .get("http://localhost:3000/api/food")
+    api
+      .get("/api/food")
       .then((response) => {
         const items = response?.data?.foodItems || [];
 
@@ -128,8 +128,8 @@ const Feed = () => {
       });
 
     // Check if user is authenticated and fetch their liked/saved items
-    axios
-      .get("http://localhost:3000/api/food/liked", { withCredentials: true })
+    api
+      .get("/api/food/liked", { withCredentials: true })
       .then((response) => {
         setLikedFoodIds(response?.data?.likedFoodIds || []);
         setIsAuthenticated(true);
@@ -139,8 +139,8 @@ const Feed = () => {
         setIsAuthenticated(false);
       });
 
-    axios
-      .get("http://localhost:3000/api/food/saved", { withCredentials: true })
+    api
+      .get("/api/food/saved", { withCredentials: true })
       .then((response) => {
         setSavedFoodIds(response?.data?.savedFoodIds || []);
       })
@@ -159,8 +159,8 @@ const Feed = () => {
 
     try {
       const endpoint = type === "like" ? "/api/food/like" : "/api/food/save";
-      const response = await axios.post(
-        `http://localhost:3000${endpoint}`,
+      const response = await api.post(
+        endpoint,
         { foodId },
         { withCredentials: true }
       );

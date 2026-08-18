@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "node backend/server.js"
+  },
   "dependencies": {
     "@imagekit/nodejs": "^7.10.0",
     "bcryptjs": "^3.0.3",
@@ -13,3 +16,4 @@
     "uuid": "^14.0.1"
   }
 }
+

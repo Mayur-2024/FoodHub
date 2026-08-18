@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../../api/api";
 import { useNavigate } from "react-router-dom";
 
 import "../../styles/create-food.css";
@@ -38,7 +38,7 @@ const CreateFood = () => {
     payload.append("video", video);
 
     try {
-      await axios.post("http://localhost:3000/api/food", payload, {
+      await api.post("/api/food", payload, {
         withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data",

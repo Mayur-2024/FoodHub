@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/auth.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../../api/api';
 
 const UserLogin = () => {
 
@@ -24,8 +24,8 @@ const UserLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await axios.post(
-      'http://localhost:3000/api/auth/user/login',
+    const response = await api.post(
+      '/api/auth/user/login',
       formData,
       {withCredentials: true}
     );

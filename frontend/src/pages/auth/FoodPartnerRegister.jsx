@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/auth.css';
-import axios from 'axios';
+import api from '../../api/api';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -32,8 +32,8 @@ const FoodPartnerRegister = () => {
 
     try{
 
-      const response = await axios.post(
-        'http://localhost:3000/api/auth/foodpartner/register',
+      const response = await api.post(
+        '/api/auth/foodpartner/register',
         {...formData,
           fullname: formData.ownerName
         },

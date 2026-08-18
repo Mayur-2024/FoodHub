@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/profile.css";
-import axios from "axios";
+import api from "../../api/api";
 import { useParams, useNavigate } from "react-router-dom";
 
 
@@ -12,7 +12,7 @@ const Profile = () => {
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/food-partner/${id}`, {withCredentials: true})
+        api.get(`/api/food-partner/${id}`, {withCredentials: true})
             .then(response => {
                 setProfile(response.data.foodPartner)
                 setVideos(response.data.foodPartner.foodItems)

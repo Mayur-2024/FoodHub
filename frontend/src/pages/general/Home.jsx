@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../styles/home.css";
-import axios from "axios";
+import api from "../../api/api";
 import { Link, useNavigate } from "react-router-dom";
 
 const HeartIcon = () => (
@@ -96,8 +96,8 @@ const Home = () => {
   }, [activeIndex]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/food", { withCredentials: true })
+    api
+      .get("/api/food", { withCredentials: true })
       .then((response) => {
         const items = response?.data?.foodItems || [];
 
@@ -119,8 +119,8 @@ const Home = () => {
         setVideoFeeds([]);
       });
 
-    axios
-      .get("http://localhost:3000/api/food/liked", { withCredentials: true })
+    api
+      .get("/api/food/liked", { withCredentials: true })
       .then((response) => {
         setLikedFoodIds(response?.data?.likedFoodIds || []);
       })
@@ -128,8 +128,8 @@ const Home = () => {
         setLikedFoodIds([]);
       });
 
-    axios
-      .get("http://localhost:3000/api/food/saved", { withCredentials: true })
+    api
+      .get("/api/food/saved", { withCredentials: true })
       .then((response) => {
         setSavedFoodIds(response?.data?.savedFoodIds || []);
       })
@@ -141,8 +141,8 @@ const Home = () => {
   const handleActionToggle = async (type, foodId) => {
     try {
       const endpoint = type === "like" ? "/api/food/like" : "/api/food/save";
-      const response = await axios.post(
-        `http://localhost:3000${endpoint}`,
+      const response = await api.post(
+        endpoint,
         { foodId },
         { withCredentials: true }
       );

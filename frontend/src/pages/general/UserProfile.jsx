@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../api/api";
 import { useNavigate } from "react-router-dom";
 import "../../styles/profile.css";
 
@@ -22,8 +22,8 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/auth/user/profile", { withCredentials: true })
+    api
+      .get("/api/auth/user/profile", { withCredentials: true })
       .then((response) => {
         setUser(response?.data?.user || null);
         setSavedItems(response?.data?.savedItems || []);
@@ -40,7 +40,7 @@ const UserProfile = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:3000/api/auth/user/logout", { withCredentials: true });
+      await api.get("/api/auth/user/logout", { withCredentials: true });
       navigate("/");
     } catch (error) {
       console.error("Logout failed:", error);

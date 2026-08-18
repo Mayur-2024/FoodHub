@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/auth.css';
-import axios from 'axios';
+import api from '../../api/api';
 import { useNavigate } from 'react-router-dom';
 
 const FoodPartnerLogin = () => {
@@ -24,8 +24,8 @@ const FoodPartnerLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await axios.post(
-      'http://localhost:3000/api/auth/foodpartner/login',
+    const response = await api.post(
+      '/api/auth/foodpartner/login',
       formData,
       {withCredentials: true}
     );

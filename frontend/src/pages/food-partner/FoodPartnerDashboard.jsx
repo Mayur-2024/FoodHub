@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../api/api";
 import { useNavigate, Link } from "react-router-dom";
 import "../../styles/profile.css";
 
@@ -10,8 +10,8 @@ const FoodPartnerDashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/auth/foodpartner/profile", { withCredentials: true })
+    api
+      .get("/api/auth/foodpartner/profile", { withCredentials: true })
       .then((response) => {
         setFoodPartner(response.data.foodPartner);
         setVideos(response.data.foodPartner?.foodItems || []);
@@ -27,7 +27,7 @@ const FoodPartnerDashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:3000/api/auth/foodpartner/logout", { withCredentials: true });
+      await api.get("/api/auth/foodpartner/logout", { withCredentials: true });
     } catch (error) {
       console.error("Logout failed:", error);
     }
